@@ -1,6 +1,6 @@
 # GameOfLife
 
-c++ simulator of <link href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Conway's Game of Life, a cellular simulation.</link>
+c++ simulator of <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Conway's Game of Life</a>, a cellular simulation.
 
 <h1>How to Play</h1>
 Activate (click on) the cells that will begin the simulation as living cells. 
