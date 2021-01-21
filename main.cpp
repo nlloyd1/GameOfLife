@@ -17,13 +17,13 @@ Cell& getCell(std::vector<std::vector<Cell>>& grid, int x, int y) {
 	if (x < 0) {
 		x = GRIDSIZE - 1;
 	}
-	if (x >= 80) {
+	if (x >= GRIDSIZE) {
 		x = 0;
 	}
 	if (y < 0) {
 		y = GRIDSIZE - 1;
 	}
-	if (y >= 80) {
+	if (y >= GRIDSIZE) {
 		y = 0;
 	}
 	return grid[y][x];
@@ -49,19 +49,17 @@ int main()
 {
 	// Create a Window to Display Graphics, Define Size and Window Name
 	sf::RenderWindow window(sf::VideoMode(GRIDSIZE * CELLSIZE, GRIDSIZE * CELLSIZE), "Conway's Game of Life");
-
 	std::vector<std::vector<Cell>> grid(GRIDSIZE, std::vector<Cell>(GRIDSIZE, Cell()));
 	bool paused = true;
+
 	// Run the Program while the Window is Open
-	while (window.isOpen())
-	{
+	while (window.isOpen()) {
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
+		while (window.pollEvent(event)) {
 			// When X Button Clicked, Close Window
 			if (event.type == sf::Event::Closed)
 				window.close();
-			// Otherwise, check for user clicks
+			// Activate cell that user clicks on
 			else if (event.type == sf::Event::MouseButtonPressed) {
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				Cell& cell = getCell(grid, mousePos.x / CELLSIZE, mousePos.y / CELLSIZE);
@@ -70,29 +68,33 @@ int main()
 			// Start and stop the game using the spacebar
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 			{
-				if (paused == false) {
+				// Pause button
+				if (!paused) {
 					paused = true;
 				}
-				else {
+				// Play nutton
+				else if (paused) {
 					paused = false;
 				}
 			}
-			if (paused == false) {
+			// Update game whenever it isn't paused
+			if (!paused) {
 				tickGrid(grid);
-				for (auto &row : grid) {
+				for (auto& row : grid) {
 					for (auto& cell : row) {
 						cell.tickCell();
 					}
 				}
 			}
 		}
+		// Sets grid based on GRIDSIZE and CELLSIZE
 		for (int row = 0; row < GRIDSIZE; row++) {
 			for (int col = 0; col < GRIDSIZE; col++) {
 				grid[row][col].cellshape.setPosition(col * CELLSIZE, row * CELLSIZE);
 			}
 		}
 		window.clear();
-
+		// Calls the draw function for each cell
 		for (auto& row : grid) {
 			for (auto& cell : row) {
 				cell.drawCell(window);
