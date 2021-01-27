@@ -51,7 +51,6 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(GRIDSIZE * CELLSIZE, GRIDSIZE * CELLSIZE), "Conway's Game of Life");
 	std::vector<std::vector<Cell>> grid(GRIDSIZE, std::vector<Cell>(GRIDSIZE, Cell()));
 	bool paused = true;
-
 	// Run the Program while the Window is Open
 	while (window.isOpen()) {
 		sf::Event event;
@@ -78,11 +77,23 @@ int main()
 				}
 			}
 			// Update game whenever it isn't paused
-			if (!paused) {
+			while (!paused) {
 				tickGrid(grid);
 				for (auto& row : grid) {
 					for (auto& cell : row) {
 						cell.tickCell();
+					}
+				}
+				// Check for spacebar event (game paused)
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+				{
+					// Pause button
+					if (!paused) {
+						paused = true;
+					}
+					// Play nutton
+					else if (paused) {
+						paused = false;
 					}
 				}
 			}
