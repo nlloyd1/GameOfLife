@@ -3,7 +3,7 @@
 c++ simulator of <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Conway's Game of Life</a>, a cellular simulation.
 
 <h1>How to Play</h1>
-Activate (click on) the cells that will begin the simulation as living cells. Black cells represent active (living) cells, white cells represent inactive (dead) cells. Press the space bar to see the next generation of cells. One space bar click = one generation. 
+Activate (click on) the cells that will begin the simulation as living cells. Black cells represent active (living) cells, white cells represent inactive (dead) cells. Press the space bar to see the next generation of cells (one click = one generation). Press and hold the space bar to see mulitple generations at a time. 
 
 
 <h3>Rules</h3>
